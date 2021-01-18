@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MY PORTFOLIO</title>
+</head>
+<style type="text/css">
+	.body
+	{
+		font-family:Arial;
+	}
+	
+	.main
+	{   
+		text-align:center;
+		display:flex;
+		justify-content: center;
+		background color:aliceblue ;
+
+		
+	}
+	.main1
+	{
+		
+		padding:10px;
+		font-family:Arial;
+
+	}
+
+	img
+	{
+		border-radius: 50%;
+		border:1px;
+	}
+
+</style>
+<body>
+	<div id= "loader">
+		Loading..
+	</div>
+<div class="main" id="container" hidden>
+	
+	<div class="main1">
+	<img 
+	   id="profile"
+	   height="220"
+	   width="220"
+	>
+	<h3 id="Name"></h3>
+	<p id="username"> </p>
+	<p>I live in <span id="location"></span></p>
+	<p>I have currently <span id="followers"></span> followers</p>
+	<span> You can check my profile from <a id="gitlink">
+		Here.
+	</a>
+    </div>
+</div>
+	<script type="text/javascript">
+		fetch("https://api.github.com/users/manesha07")
+		.then(response => response.json())
+		.then(function(data)
+		{
+			console.log(data)
+			document.getElementById('profile').src = data['avatar_url']
+			document.getElementById('Name').textContent=data['name']
+			document.getElementById('username').textContent=data['login']
+			document.getElementById('location').textContent= data['location']
+			document.getElementById('followers').textContent= data['followers']
+			document.getElementById('gitlink').href = data['html_url']
+			document.getElementById('container').hidden=false
+			document.getElementById('loader').hidden=true
+		})
+	</script>
+
+
+</body>
+</html>
